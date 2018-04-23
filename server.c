@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
         /* Add Code: Make the handshake socket a listening socket, with a
         * specified Queue Size
         */
-        ret =  listen(handshake_sockfd, BSIZE);
+        ret =  listen(handshake_sockfd, QSIZE);
 
         if (ret < 0) {
                 perror("Error Listening on Socket");
@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
         * write the line back to the client. Continue until there are no
         * more lines to read.
         */
-        while (read(handshake_sockfd, buf, BSIZE) > 0) {
+        while (read(session_sockfd, buf, BSIZE) > 0) {
                 printf("RECEIVED:\n%s", buf);
                 convert_string(buf);
                 printf("SENDING:\n%s\n", buf);
